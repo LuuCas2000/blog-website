@@ -24,7 +24,7 @@
             flex-direction:column;
         }
 
-        #form__div > form > input, select {
+        #form__div > form > input {
             padding:8px;
             margin:8px;
             font-size:17px;
@@ -77,21 +77,17 @@
         }
         }
     </style>
-    <title>Create new account</title>
+    <title>User login</title>
 </head>
 <body>
     <div id="form__div">
-        <h1>Create new account</h1>
-        <form method="post" action="/user/create">
+        <h1>Log in</h1>
+        <form method="post" action="/user/login">
             <input type="text" placeholder="username" id="username" name="username"/>
             <input type="text" placeholder="password" id="password" name="password"/>
-            <select name="roles">
-                <option value="author">author</option>
-                <option disabled value="admin">admin</option>
-            </select>
-            <button type="submit">create user</button>
+            <button type="submit">log in</button>
         </form>
-        <span>Already have an account ? <a href="/user/login">Log in</a></span>
+        <span>Don't have an account yet ? <a href="/user/create">Create new account</a></span>
     </div>
 </body>
 </html>

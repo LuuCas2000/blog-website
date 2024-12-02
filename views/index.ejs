@@ -3,10 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles/styles.css" />
-    <title>Blog</title>
+    <style>
+        * {
+            padding:0;
+            margin:0;
+        }
+
+        #wrapper {
+            display:flex;
+            flex-direction:column;
+        }
+
+        nav {
+            width:100%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+
+        nav > #nav__btns {
+            width:50%;
+            margin:30px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+
+        nav > #nav__btns > ul li {
+            list-style-type:none;
+            display:inline;
+            margin:10px 12px;
+            padding:4px 0;
+        }
+
+        nav > #nav__btns > ul li > a {
+            text-decoration:none;
+            color:black;
+        }
+
+        nav > #nav__btns > ul li > a:hover {
+            padding-bottom:4px;
+            border-bottom:1px solid black;
+        }
+
+        #wrapper > #intro {
+            width:90%;
+            align-self:center;
+            margin:30px 0;
+        }
+
+        #wrapper > #intro > h1 {
+            font-size:90px;
+            font-weight: lighter;
+            text-align:center;
+        }
+
+        #wrapper > #intro > h3 {
+            font-size:30px;
+            font-weight: lighter;
+            text-align:center;
+            margin:20px 0;
+        }
+
+        #wrapper > #articles {
+            width:90%;
+            display:flex;
+            flex-wrap:wrap;
+            align-self:center;
+            align-items:center;
+            justify-content:center;
+            margin-bottom:30px;
+        }
+
+        #wrapper > #articles > #article {
+            width:420px;
+            display:flex;
+            flex-direction:column;
+            margin:16px;
+        }
+
+        #wrapper > #articles > #article > #article__img {
+            width:100%;
+            height:200px;
+            border:1px solid black;
+        }
+
+        #wrapper > #articles > #article > #article__title {
+            width:100%;
+            padding:10px 0;
+        }
+
+        #wrapper > #articles > #article > #article__title > span {
+            font-size:25px;
+            text-align:justify;
+            display:block;
+            font-weight:600;
+        }
+
+        #wrapper > #articles > #article > #article__desc {
+            width:100%;
+        }
+
+        #wrapper > #articles > #article > #article__desc > span {
+            font-size:17px;
+            text-align:justify;
+            display:block;
+            font-weight:lighter;
+        }
+
+    </style>
+    <title>Lucas Codes - Blog</title>
 </head>
 <body>
-    
+    <div id="wrapper">
+        <nav>
+            <div id="nav__btns">
+                <ul>
+                    <li><a href="#">HOME</a></li>
+                    <li><a href="#">CONTACT</a></li>
+                    <li><a href="#">ABOUT</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div id="intro">
+            <h1>Lucas <span style="font-weight: 900; padding-bottom: 1px; border-bottom: 5px solid black;">Codes</span></h1>
+            <h3>Creating content about web development and technology</h3>
+        </div>
+
+        <div id="articles">
+            <div id="article">
+                <div id="article__img"></div>
+                <div id="article__title">
+                    <span>How to use the useState Hook in react</span>
+                </div>
+                <div id="article__desc">
+                    <span>Learn how to manage state in your React application with the useState hook. This guide simplifies its usage with clear examples and practical tips.</span>
+                </div>
+            </div>
+            <div id="article">
+                <div id="article__img"></div>
+                <div id="article__title">
+                    <span>How to use the useState Hook in react</span>
+                </div>
+                <div id="article__desc">
+                    <span>Learn how to manage state in your React application with the useState hook. This guide simplifies its usage with clear examples and practical tips.</span>
+                </div>
+            </div>
+            <div id="article">
+                <div id="article__img"></div>
+                <div id="article__title">
+                    <span>How to use the useState Hook in react</span>
+                </div>
+                <div id="article__desc">
+                    <span>Learn how to manage state in your React application with the useState hook. This guide simplifies its usage with clear examples and practical tips.</span>
+                </div>
+            </div>
+            <div id="article">
+                <div id="article__img"></div>
+                <div id="article__title">
+                    <span>How to use the useState Hook in react</span>
+                </div>
+                <div id="article__desc">
+                    <span>Learn how to manage state in your React application with the useState hook. This guide simplifies its usage with clear examples and practical tips.</span>
+                </div>
+            </div>
+            <div id="article">
+                <div id="article__img"></div>
+                <div id="article__title">
+                    <span>How to use the useState Hook in react</span>
+                </div>
+                <div id="article__desc">
+                    <span>Learn how to manage state in your React application with the useState hook. This guide simplifies its usage with clear examples and practical tips.</span>
+                </div>
+            </div>
+            <div id="article">
+                <div id="article__img"></div>
+                <div id="article__title">
+                    <span>How to use the useState Hook in react</span>
+                </div>
+                <div id="article__desc">
+                    <span>Learn how to manage state in your React application with the useState hook. This guide simplifies its usage with clear examples and practical tips.</span>
+                </div>
+            </div>
+        </div>
+        
+    </div>
 </body>
 </html>
