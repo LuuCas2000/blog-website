@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import helmet from 'helmet';
 import path from 'path';
+import methodOverride from 'method-override';
 
 dotenv.config({ path: './config.env' });
 
@@ -18,6 +19,7 @@ app.use(express.static(path.join(import.meta.dirname, 'views')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(helmet());
+app.use(methodOverride('_method'));
 
 const port = process.env.PORT;
 const db = process.env.DATABASE_URL.replace('<password>', process.env.DATABASE_PASSWORD);

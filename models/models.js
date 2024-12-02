@@ -38,7 +38,8 @@ const blogUserSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        minLength: [8, 'Password must contain at least 8 characters']
     },
     role: {
         type: String,
