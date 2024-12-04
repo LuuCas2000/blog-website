@@ -3,6 +3,7 @@ import express from 'express';
 import helmet from 'helmet';
 import path from 'path';
 import methodOverride from 'method-override';
+import cookieParser from 'cookie-parser';
 
 dotenv.config({ path: './config.env' });
 
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(helmet());
 app.use(methodOverride('_method'));
+app.use(cookieParser());
 
 const port = process.env.PORT;
 const db = process.env.DATABASE_URL.replace('<password>', process.env.DATABASE_PASSWORD);

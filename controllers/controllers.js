@@ -1,9 +1,12 @@
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 // IMPORTS
 import blogModel from "../models/models.js";
 
-export const main = (req, res) => {
+export const main = async (req, res) => {
+    const articles = await blogModel.findOne({ username: "Lucas" });
+    console.log(articles)
     res.render('index');
 };
 
@@ -34,27 +37,56 @@ export const userLogin = async (req, res) => {
         const user = await blogModel.findOne({ username });
         
         const isUserValid = bcrypt.compareSync(password, user.password);
-       
-        if (isUserValid) {
-            res.redirect('/')
-        } else {
-            throw new Error('incorrect credentials');
-        }
-        
+
+        //if (!isUserValid) throw new Error('incorrect credentials');
+
+        if (!isUserValid) return res.status(401).json({ msg: 'incorrect credentials' });
+
+        // GENERATE TOKEN
+        const accessToken = jwt.sign({ username: user.username, roles: user.roles }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+        res.cookie('access-token', accessToken, {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'strict',
+            maxAge: 60 * 60 * 1000 // 1h
+        });
+
+        res.redirect('/');
+
     } catch (err) {
         console.log(err.message);
     }
 };
 
+// LOGOUT USER SYSTEM
+export const logOutUser = async (req, res) => {
+    const token = req.cookies['access-token'];
+    const { username } = jwt.verify(token, process.env.JWT_SECRET);
+
+    const foundUser = await blogModel.findOne({ username });
+
+    if (foundUser) {
+        res.clearCookie('access-token', {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'None'
+        })
+    };
+
+    return res.redirect('/')
+}
+
 // CREATE NEW ARTICLE SYSTEM
 export const createArticlePage = async (req, res) => {
-    const user = await blogModel.findOne({ username: "Novyshane" });
-    console.log(user);
-    res.render('create-article', { user });
-}
+    res.render('create-article');
+};
 
 export const createArticle = async (req, res) => {
     const { title, description, markdown } = req.body;
-    await blogModel.findOneAndUpdate({ username: "Novyshane" }, { $addToSet: { articles: { title, description, markdown } } }, { runValidators: true });
+    const token = req.cookies['access-token'];
+    const { username } = jwt.verify(token, process.env.JWT_SECRET);
+
+    await blogModel.findOneAndUpdate({ username }, { $addToSet: { articles: { title, description, markdown, createdBy: username } } }, { runValidators: true });
     res.redirect('/');
-}
+};

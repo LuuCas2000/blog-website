@@ -24,7 +24,8 @@ const  articlesSchema =  new mongoose.Schema({
     },
     sanitizedHTML: {
         type: String,
-        required: true
+        required: true,
+        default: '##Hello'
     }
 
 });
@@ -41,10 +42,10 @@ const blogUserSchema = new mongoose.Schema({
         unique: true,
         minLength: [8, 'Password must contain at least 8 characters']
     },
-    role: {
-        type: String,
+    roles: {
+        type: Array,
         required: true,
-        default: 'admin'
+        default: ['author']
     },
     articles: {
         type: [articlesSchema],

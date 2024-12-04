@@ -2,8 +2,9 @@ import express from 'express';
 import { body } from 'express-validator';
 
 // IMPORTS
-import { main, createUserPage, createUser, userLoginPage, userLogin, createArticlePage, createArticle } from '../controllers/controllers.js';
+import { main, createUserPage, createUser, userLoginPage, userLogin, createArticlePage, createArticle, logOutUser } from '../controllers/controllers.js';
 import validateInput from '../input-validation.js';
+import verifyUserRole from '../authUser.js';
 
 const router = express.Router();
 
@@ -33,9 +34,13 @@ router.route('/user/login')
 
 // CREATE ARTICLE SYSTEM
 router.route('/article/new')
-.get(createArticlePage);
+.get(verifyUserRole('author', 'admin'), createArticlePage);
 
 router.route('/article/new')
 .patch(createArticle);
+
+// LOGOUT USER SYSTEM
+router.route('/user/logout')
+.get(logOutUser);
 
 export default router;
