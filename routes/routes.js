@@ -5,6 +5,7 @@ import { body } from 'express-validator';
 import { main, createUserPage, createUser, userLoginPage, userLogin, createArticlePage, createArticle, logOutUser } from '../controllers/controllers.js';
 import validateInput from '../input-validation.js';
 import verifyUserRole from '../authUser.js';
+import { upload } from '../multer-config.js'
 
 const router = express.Router();
 
@@ -37,10 +38,10 @@ router.route('/article/new')
 .get(verifyUserRole('author', 'admin'), createArticlePage);
 
 router.route('/article/new')
-.patch(createArticle);
+.post(upload.single('image_cover'), createArticle);
 
 // LOGOUT USER SYSTEM
 router.route('/user/logout')
 .get(logOutUser);
 
-export default router;
+export default router; 

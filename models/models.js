@@ -22,6 +22,11 @@ const  articlesSchema =  new mongoose.Schema({
         type: Date,
         default: Date.now
     },
+    image: {
+        type: String,
+        default: '/',
+        required: true
+    },
     sanitizedHTML: {
         type: String,
         required: true,
@@ -46,13 +51,8 @@ const blogUserSchema = new mongoose.Schema({
         type: Array,
         required: true,
         default: ['author']
-    },
-    articles: {
-        type: [articlesSchema],
-        required: true
     }
 });
 
-const blogModel = mongoose.model('blog', blogUserSchema, 'blog-user');
-
-export default blogModel;
+export const userModel = mongoose.model('blog-user', blogUserSchema);
+export const articleModel = mongoose.model('blog-article', articlesSchema);

@@ -2,12 +2,11 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 // IMPORTS
-import blogModel from "../models/models.js";
+import { userModel, articleModel } from "../models/models.js";
 
 export const main = async (req, res) => {
-    const articles = await blogModel.findOne({ username: "Lucas" });
-    console.log(articles)
-    res.render('index');
+    const articles = await articleModel.find();
+    res.render('index', { articles });
 };
 
 export const userLoginPage = (req, res) => {
@@ -23,7 +22,7 @@ export const createUser = async (req, res) => {
     try {
         const { username, password, roles } = req.body;
         const hashedPassword = bcrypt.hashSync(password, 10);
-        await blogModel.create({ username, password: hashedPassword, role: roles });
+        await userModel.create({ username, password: hashedPassword, role: roles });
         res.redirect('/user/login');
     } catch (err) {
         console.log(err.message);
@@ -34,7 +33,7 @@ export const createUser = async (req, res) => {
 export const userLogin = async (req, res) => {
     try {
         const { username, password } = req.body;
-        const user = await blogModel.findOne({ username });
+        const user = await userModel.findOne({ username });
         
         const isUserValid = bcrypt.compareSync(password, user.password);
 
@@ -64,7 +63,7 @@ export const logOutUser = async (req, res) => {
     const token = req.cookies['access-token'];
     const { username } = jwt.verify(token, process.env.JWT_SECRET);
 
-    const foundUser = await blogModel.findOne({ username });
+    const foundUser = await userModel.findOne({ username });
 
     if (foundUser) {
         res.clearCookie('access-token', {
@@ -85,8 +84,9 @@ export const createArticlePage = async (req, res) => {
 export const createArticle = async (req, res) => {
     const { title, description, markdown } = req.body;
     const token = req.cookies['access-token'];
+
     const { username } = jwt.verify(token, process.env.JWT_SECRET);
 
-    await blogModel.findOneAndUpdate({ username }, { $addToSet: { articles: { title, description, markdown, createdBy: username } } }, { runValidators: true });
+    await articleModel.create({ title, description, markdown, createdBy: username, image: req.file?.originalname });
     res.redirect('/');
 };
