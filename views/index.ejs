@@ -97,7 +97,10 @@
         }
 
         #wrapper > #articles > #article {
+            position:relative;
             width:420px;
+            height:auto;
+            min-height:450px;
             display:flex;
             flex-direction:column;
             margin:16px;
@@ -106,7 +109,6 @@
         #wrapper > #articles > #article > #article__img {
             width:100%;
             height:200px;
-            border:1px solid black;
         }
 
         #wrapper > #articles > #article > #article__img > img {
@@ -126,6 +128,16 @@
             font-weight:600;
         }
 
+        #wrapper > #articles > #article > #article_date {
+            width:100%;
+            padding-bottom:10px;
+        }
+
+        #wrapper > #articles > #article > #article_date > span {
+            font-size:17px;
+            display:block;
+        }
+
         #wrapper > #articles > #article > #article__desc {
             width:100%;
         }
@@ -135,6 +147,21 @@
             text-align:justify;
             display:block;
             font-weight:lighter;
+        }
+
+        #wrapper > #articles > #article > #btns {
+            position:absolute;
+            width:100%;
+            padding-top:16px;
+            bottom:0;
+        }
+
+        #wrapper > #articles > #article > #btns > a {
+            text-decoration:none;
+            font-size:17px;
+            color:blue;
+            padding-bottom:4px;
+            border-bottom:1px solid blue;
         }
 
     </style>
@@ -163,6 +190,9 @@
 
         <div id="articles">
             <% articles.forEach(article => { %>
+                <% if (article.length === 0) { %>
+                    <span>no articles yet</span>
+                <% } %>
                 <div id="article">
                     <div id="article__img">
                         <img src="./images/<%= article.image %>" alt="img" />
@@ -170,8 +200,14 @@
                     <div id="article__title">
                         <span><%= article.title %></span>
                     </div>
+                    <div id="article_date">
+                        <span>02/03/2000</span>
+                    </div>
                     <div id="article__desc">
                         <span><%= article.description %></span>
+                    </div>
+                    <div id="btns">
+                        <a href="/articles/<%= article.slug %>">Read more</a>
                     </div>
                 </div>
             <% }) %>

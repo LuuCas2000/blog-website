@@ -1,4 +1,9 @@
 import mongoose from 'mongoose';
+import { marked } from 'marked';
+import createDOMPurify from 'dompurify';
+import { JSDOM } from 'jsdom';
+const dompurify = createDOMPurify(new JSDOM().window);
+import slugify from 'slugify';
 
 const  articlesSchema =  new mongoose.Schema({
     title:  {
@@ -8,7 +13,7 @@ const  articlesSchema =  new mongoose.Schema({
     },
     description: {
         type: String,
-        required: true
+        required: false
     },
     markdown: {
         type: String,
@@ -18,9 +23,18 @@ const  articlesSchema =  new mongoose.Schema({
         type: String,
         required: true
     },
+    userId: {
+        type: String,
+        required: true
+    },
     createdAt: {
         type: Date,
         default: Date.now
+    },
+    slug: {
+        type: String,
+        required: true,
+        unique: true
     },
     image: {
         type: String,
@@ -52,6 +66,17 @@ const blogUserSchema = new mongoose.Schema({
         required: true,
         default: ['author']
     }
+});
+
+articlesSchema.pre('validate', function(next) {
+    if (this.title) {
+        this.slug = slugify(this.title, { lower: true, strict: true });
+    }
+
+    if (this.markdown) {
+        this.sanitizedHTML = dompurify.sanitize(marked.parse(this.markdown));
+    }
+    next();
 });
 
 export const userModel = mongoose.model('blog-user', blogUserSchema);

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin:0;
+            padding:0;
+        }
+
+        #wrapper {
+            width:100%;
+            height:100vh;
+            min-height:100%;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+        }
+
+        #wrapper > #article_body {
+            width:70%;
+        }
+
+        #wrapper > #article_body > #article_title {
+            font-weight: 200;
+            font-size:50px;
+            margin:30px 0;
+        }
+
+        #wrapper > #article_body > #article_infos {
+            width:100%;
+        }
+
+        #wrapper > #article_body > #article_infos > ul li {
+            list-style-type:none;
+            font-size:17px;
+        }
+
+        #wrapper > #article_body > #btns {
+            width:100%;
+            margin-top:12px;
+            padding:15px 0;
+            display:flex;
+        }
+
+        #wrapper > #article_body > #btns > a {
+            text-decoration:none;
+            font-size:17px;
+            padding:8px 12px;
+            border:1px solid black;
+            border-radius:8px;
+            color:black;
+        }
+
+        #wrapper > #article_body > #btns > form > button {
+            font-size:17px;
+            padding:8px 12px;
+            border:1px solid black;
+            border-radius:8px;
+            color:black;
+            cursor:pointer;
+            background-color:white;
+        }
+
+        #wrapper > #article_body > #article_content {
+            width:100%;
+            display:flex;
+            flex-direction:column;
+            text-align:justify;
+            margin-bottom:30px;
+        }
+
+        #wrapper > #article_body > #article_content > h2 {
+            font-size:30px;
+            font-weight:300;
+            margin:12px 0;
+        }
+
+        #wrapper > #article_body > #article_content > p {
+            font-size:17px;
+            margin:12px 0;
+        }
+
+        #wrapper > #article_body > #article_content > pre {
+            font-size:17px;
+            margin:12px 0;
+        }
+
+        #wrapper > #article_body > #article_content > ul li {
+            font-size:17px;
+            margin:12px 30px;
+        }
+
+
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="article_body">
+            <h1 id="article_title">ReactJS - How to use the usestate hook</h1>
+            <div id="article_infos">
+                <ul>
+                    <li style="margin-bottom: 12px;">Posted · <%= articles.createdAt.toLocaleDateString() %></li>
+                    <li style="margin-bottom: 12px;">Reading time · <%= reading.text %></li>
+                    <li>Author · <%= articles.createdBy %></li>
+                </ul>
+            </div>
+            <div id="btns">
+                <a style="margin-right:4px;" href="/">All articles</a>
+                <% if (user.roles.includes('admin') || articles.createdBy === user.username) { %>
+                    <form style="margin-right:4px;" method="POST" action="/articles/<%= articles._id %>?_method=DELETE">
+                        <button type="submit">Delete</button>
+                    </form>
+                    <a href="/article/edit/<%= articles._id %>">Edit</a>
+                <% } %>
+            </div>
+            <div id="article_content">
+                <%- articles.sanitizedHTML %>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
