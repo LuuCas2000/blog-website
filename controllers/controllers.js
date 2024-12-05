@@ -101,10 +101,10 @@ export const readingPage = async (req, res) => {
             roles: ['']
         };
 
-        return res.render('article-read', { articles, user, reading });
+        return res.render('article-read', { articles, user, reading: reading.text });
     } else {
         const user = jwt.verify(token, process.env.JWT_SECRET);
-        return res.render('article-read', { articles, user });
+        return res.render('article-read', { articles, user, reading: reading.text });
     }
 };
 

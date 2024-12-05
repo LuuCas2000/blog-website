@@ -201,7 +201,7 @@
                         <span><%= article.title %></span>
                     </div>
                     <div id="article_date">
-                        <span>02/03/2000</span>
+                        <span><%= article.createdAt.toLocaleDateString() %></span>
                     </div>
                     <div id="article__desc">
                         <span><%= article.description %></span>
