@@ -17,8 +17,10 @@ Endpoints for each actions:
 - **/article/edit/:article-identifier** (edit an article, "a user must be the article's author in order to edit it")
 - **/article/delete/:article-identifier** (delete an article, "a user must be the article' author in order to delete it")
 
-NPM packages used in this project:
-
+Stacks & NPM packages used in this project:
+- NodeJS
+- MongoDB
+  
 - bcrypt
 - cookie-parser
 - dompurify
