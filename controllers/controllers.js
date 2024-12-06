@@ -23,7 +23,7 @@ export const createUser = async (req, res) => {
     try {
         const { username, password, roles } = req.body;
         const hashedPassword = bcrypt.hashSync(password, 10);
-        await userModel.create({ username, password: hashedPassword, role: roles });
+        await userModel.create({ username, password: hashedPassword, roles: roles, profile: { username, password: hashedPassword, picture: req.file?.originalname } });
         res.redirect('/user/login');
     } catch (err) {
         console.log(err.message);
@@ -118,14 +118,14 @@ export const articleEditPage = async (req, res) => {
     res.render('article-edit', { article });
 };
 
-export const articleEdit = async (req, res) => {
+export const articleEdit = (req, res) => {
     const { title, description, markdown } = req.body;
-    const article = await articleModel.findByIdAndUpdate(req.params.id);
+    articleModel.findById(req.params.id).then(article => {
+        article.title = title;
+        article.description = description;
+        article.markdown = markdown;
 
-    let editedArticle = article;
-    editedArticle.title = title;
-    editedArticle.description = description;
-    editedArticle.markdown = markdown;
-    editedArticle = await editedArticle.save();
-    res.redirect('/')
+        article.save();
+        res.redirect(`/articles/${article.slug}`);
+    });
 };

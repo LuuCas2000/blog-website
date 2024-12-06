@@ -49,6 +49,24 @@ const  articlesSchema =  new mongoose.Schema({
 
 });
 
+const profileSchema = new mongoose.Schema({
+    username: {
+        type: String,
+        unique: true,
+        required: true
+    },
+    password: {
+        type: String,
+        unique: false,
+        required: true
+    },
+    picture: {
+        type: String,
+        required: true,
+        default: '/'
+    }
+});
+
 const blogUserSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -65,6 +83,10 @@ const blogUserSchema = new mongoose.Schema({
         type: Array,
         required: true,
         default: ['author']
+    },
+    profile: {
+        type: [profileSchema],
+        required: true
     }
 });
 

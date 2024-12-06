@@ -18,7 +18,7 @@ router.route('/user/create')
 .get(createUserPage);
 
 router.route('/user/create')
-.post(validateInput([
+.post(upload.single('picture'), validateInput([
     body('username').notEmpty().withMessage('username field must not be empty').trim().escape(),
     body('password').notEmpty().isLength({ min: 8 }).withMessage('Password must be at least 8 characters')
     .matches('[0-9]').withMessage('Password must contain a number')
@@ -38,11 +38,11 @@ router.route('/article/new')
 .get(verifyUserRole('author', 'admin'), createArticlePage);
 
 router.route('/article/new')
-.post(validateInput([
+.post(upload.single('image_cover'), validateInput([
     body('title').trim().escape(),
     body('description').trim().escape(),
     body('markdown').trim().escape()
-]), upload.single('image_cover'), createArticle);
+]), createArticle);
 
 // LOGOUT USER SYSTEM
 router.route('/user/logout')
