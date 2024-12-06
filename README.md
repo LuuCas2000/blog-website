@@ -16,3 +16,23 @@ Endpoints for each actions:
 - **/article/new** (create a new article, "a user can access this endpoint after signing in its account")
 - **/article/edit/:article-identifier** (edit an article, "a user must be the article's author in order to edit it")
 - **/article/delete/:article-identifier** (delete an article, "a user must be the article' author in order to delete it")
+
+NPM packages used in this project:
+
+- bcrypt
+- cookie-parser
+- dompurify
+- dotenv
+- ejs
+- express
+- express-validator
+- helmet
+- jsdom
+- jsonwebtoken
+- marked
+- method-override
+- mongoose
+- multer
+- nodemon
+- reading-time-estimator
+- slugify
