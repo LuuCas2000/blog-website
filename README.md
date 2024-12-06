@@ -3,6 +3,7 @@
 In this project, a user can perform the following actions:
 
 - Sign in & Sign up account
+- Log out account
 - Create, Read, Update and Delete their own articles
 - Update their account informations
 
