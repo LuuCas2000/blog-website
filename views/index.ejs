@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Radley:ital@0;1&family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap');
+
         * {
             padding:0;
             margin:0;
@@ -14,7 +17,13 @@
             flex-direction:column;
         }
 
+        body {
+            font-family: "Ubuntu", sans-serif;
+            font-size:17px;
+        }
+
         nav {
+            position:relative;
             width:100%;
             display:flex;
             align-items:center;
@@ -83,7 +92,8 @@
             font-size:30px;
             font-weight: lighter;
             text-align:center;
-            margin:20px 0;
+            margin-top:30px;
+            margin-bottom:30px;
         }
 
         #wrapper > #articles {
@@ -93,7 +103,7 @@
             align-self:center;
             align-items:center;
             justify-content:center;
-            margin-bottom:30px;
+            margin-bottom:50px;
         }
 
         #wrapper > #articles > #article {
@@ -150,10 +160,11 @@
         }
 
         #wrapper > #articles > #article > #btns {
-            position:absolute;
+            /*position:absolute;*/
             width:100%;
             padding-top:16px;
-            bottom:0;
+            /*bottom:0;*/
+            margin-top:auto;
         }
 
         #wrapper > #articles > #article > #btns > a {
@@ -162,6 +173,24 @@
             color:blue;
             padding-bottom:4px;
             border-bottom:1px solid blue;
+        }
+
+        @media screen and (max-width: 1000px) {
+            #wrapper > #search_bar > #input_div {
+                width:60%;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            #wrapper > #search_bar > #input_div {
+                width:90%;
+            }
+        }
+
+        @media screen and (max-width: 520px) {
+            nav > #nav__btns {
+                width:100%;
+            }
         }
 
     </style>

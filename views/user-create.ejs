@@ -4,9 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Radley:ital@0;1&family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap');
+
         *  {
             margin:0;
             padding:0;
+        }
+
+        body {
+            font-family: "Ubuntu", sans-serif;
+            font-size:17px;
         }
 
         #form__div {
@@ -82,9 +89,14 @@
 <body>
     <div id="form__div">
         <h1>Create new account</h1>
-        <form method="post" action="/user/create">
+        <form method="post" action="/user/create" enctype="multipart/form-data">
+            <label for="username">username</label>
             <input type="text" placeholder="username" id="username" name="username"/>
+            <label for="password">password</label>
             <input type="text" placeholder="password" id="password" name="password"/>
+            <label for="picture">user picture</label>
+            <input type="file" name="picture" id="picture"/>
+            <label for="roles">user roles</label>
             <select name="roles">
                 <option value="author">author</option>
                 <option disabled value="admin">admin</option>
