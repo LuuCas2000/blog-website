@@ -20,7 +20,7 @@ Endpoints for each actions:
 Stacks & NPM packages used in this project:
 - NodeJS
 - MongoDB
-  
+- mongoose
 - bcrypt
 - cookie-parser
 - dompurify
