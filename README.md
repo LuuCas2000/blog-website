@@ -18,8 +18,8 @@ Endpoints for each actions:
 - **/article/delete/:article-identifier** (delete an article, "a user must be the article' author in order to delete it")
 
 Stacks & NPM packages used in this project:
-- NodeJS
-- MongoDB
+- nodejs
+- mongodb
 - mongoose
 - bcrypt
 - cookie-parser
